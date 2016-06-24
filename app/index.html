@@ -10,23 +10,21 @@
 		<title>Open Weather Map Application</title>
 	</head>
 	<body class="owm-body">
-
-		<div class="navbar owm-history" ng-controller="HistoryCtrl">
-			<div ng-repeat="listing in listings">
-				<div ng-if="listing.isHome">
-					<a ng-href="#/">Home</a>
-				</div>
-				<div ng-if="!listing.isHome">
-					<a ng-href="#!/cities/{{ listing.name }}">{{ listing.name }}</a>
-				</div>
-			</div>
-		</div>
-
 		<div class="navbar owm-navigation">
 			<ul>
 				<li><a href="#!/">US Cities</a></li>
 				<li><a href="#!/near-me">Near Me</a></li>
 			</ul>
+		</div>
+		<div class="navbar owm-history" ng-controller="HistoryCtrl">
+			<div ng-if="listing.isHome">
+				<a ng-href="#/">Home</a>
+			</div>
+			<div ng-repeat="listing in listings">
+				<div ng-if="!listing.isHome">
+					<a ng-href="#!/cities/{{ listing.name }}">{{ listing.name }}</a>
+				</div>
+			</div>
 		</div>
 		<div class="owm-view fade" ng-view></div>
 		

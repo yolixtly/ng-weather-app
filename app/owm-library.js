@@ -21,7 +21,8 @@ angular.module('owmLibrary', [])
       return $http.get(OWM_API_PREFIX, {params: reqParams})
         .then(function(response){
           console.log('AJAX Request: ');
-          console.log(response.data); //logs the API response data from OWM_API 
+          console.log(response.data);
+          console.log(params); //logs the API response data from OWM_API 
           //when the AJAX request returns a promise ($http) and AJAX request is successful
           //then the $q promise will be resolved >> 
           return $q.when(response.data);
@@ -74,7 +75,7 @@ angular.module('owmLibrary', [])
     return function(loc) {
       var params = {
         lat : loc.lat,
-        lng : loc.lng
+        lon : loc.lon
       };
       console.log('when requesting nearby weather these are the params instead of a city name: ');
       console.log(params);

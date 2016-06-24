@@ -17,7 +17,7 @@ viewsModule.controller('NearMeCtrl', ['$scope', 'geolocation', 'owmNearby', '$lo
     .then(function(data) {
       return $q.when({
         lat: data.coords.latitude,
-        lng: data.coords.longitude
+        lon: data.coords.longitude
       });
     })
     .then(owmNearby)
