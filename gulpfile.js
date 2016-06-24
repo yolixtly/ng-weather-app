@@ -1,4 +1,6 @@
 // Include gulp
+//The require statements tells node to look in to the node_modules
+//folder for a packaged name : gulp/ gulp-connect etc.
 var gulp = require('gulp'); 
 var connect = require('gulp-connect');
 var uglify = require('gulp-uglify');
@@ -26,11 +28,24 @@ var paths = {
   build: './build/'
 }
 /* 1 */
-gulp.task('clean', function(){
-  gulp.src( paths.build, { read: false } )
-    .pipe(clean());
+/*The basic syntax for a gulp task is : 
+
+gulp.task('task-name', function(){
+  //code goes here
 });
 
+task-name: referest to the name of the task. it will be used whenever you want to run a task in gulp
+for example in the CMD : $ gulp task-name
+
+*/
+gulp.task('clean', function(){
+  gulp.src( paths.build, { read: false } )
+    .pipe(clean()); //Since the task is meant to clean the build, we call this clean()
+});
+/*
+gulp.src tells gulp what files to use for the task. (source / input files)
+gulp.dest tells gulp where to output the files once the task is completed (destination / output files)
+*/
 gulp.task('copy', [ 'clean' ], function() {
   gulp.src( paths.html )
     .pipe(gulp.dest('build/'));
@@ -47,10 +62,11 @@ gulp.task('usemin', [ 'copy' ], function(){
 
 gulp.task('build', ['usemin']);
 
+/*Conect is the default as it is specified in the last line*/
 // connect
 gulp.task('connect', function() {
   connect.server({
     root: 'app/'
   });
 });
-gulp.task('default', ['connect']);
+gulp.task('default', ['build', 'connect']);

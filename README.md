@@ -1,5 +1,10 @@
 # Thinkful Weather App
 
+My forked repository of this file, contains abundant comments in order to track 
+and understand how this app is wired up (how everything is connected)
+
+
+
 A simple static angular application built with angular, underscore and gulp
 to query weather information for the top 100 US cities.
 

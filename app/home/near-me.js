@@ -4,11 +4,15 @@ viewsModule.config(['$routeProvider', function($routeProvider) {
     controller : 'NearMeCtrl'
   });
 }]);
-
+//injects owmNearby factory from owm-library.js
+//the geolocation service is a plugin that has been included in the app
 viewsModule.controller('NearMeCtrl', ['$scope', 'geolocation', 'owmNearby', '$location', '$q',
   function($scope, geolocation, owmNearby, $location, $q) {
   $scope.loading = true;
-
+  //from the factories it gets the data and looks for the lat and lng properties
+  //located at: Object.city.coord.lat/lon or data.coords.latitude/longitude
+  //this returns a promise that when resolved returns an object with the latitud
+  //and longitud
   geolocation.getLocation()
     .then(function(data) {
       return $q.when({
@@ -34,3 +38,6 @@ viewsModule.controller('NearMeCtrl', ['$scope', 'geolocation', 'owmNearby', '$lo
       $scope.loading = false;
     });
 }]);
+//Those values are then passed into the owmNearby service 
+//which then queries the remote API to figure out which city is closest to us. 
+//Once you get that city you then redirect to its profile page.
